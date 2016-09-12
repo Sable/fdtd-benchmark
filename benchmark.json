@@ -1,0 +1,15 @@
+{
+   "type": "benchmark",
+   "name":"Finite Difference Time Domain",
+   "short-name":"fdtd",
+   "description":"Apply the Finite Difference Time Domain (FDTD) technique on a hexahedral cavity with conducting walls.",
+   "version":"1.0.0",
+   "input-size":{
+      "small":1,
+      "medium":3,
+      "large": 5
+   },
+   "expected-output": {
+      "medium": 63997
+   }
+}
