@@ -10,6 +10,8 @@
       "large": 5
    },
    "expected-output": {
-      "medium": 63997
+      "small": 22002,
+      "medium": 34806,
+      "large": 21235
    }
 }
