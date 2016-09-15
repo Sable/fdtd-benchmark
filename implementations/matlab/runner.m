@@ -18,19 +18,18 @@ tic();
 elapsed = toc();
 
 ADJUST = 1000;
-%disp(Ex)
-%checksum = fletcherSum(floor(ADJUST*Ex)) %+...
-    %fletcherSum(floor(ADJUST*Ey)) +...
-    %fletcherSum(floor(ADJUST*Ez)) +...
-    %fletcherSum(floor(ADJUST*Hx)) +...
-    %fletcherSum(floor(ADJUST*Hy)) +...
-    %fletcherSum(floor(ADJUST*Hz));
+checksum = fletcherSum([fletcherSum(floor(ADJUST*Ex)),
+    fletcherSum(floor(ADJUST*Ey)),
+    fletcherSum(floor(ADJUST*Ez)),
+    fletcherSum(floor(ADJUST*Hx)),
+    fletcherSum(floor(ADJUST*Hy)),
+    fletcherSum(floor(ADJUST*Hz))]);
 
 disp('{');
 disp('"time":');
 disp(elapsed);
-%disp(', "output":');
-%disp(checksum);
+disp(', "output":');
+disp(checksum);
 disp('}');
 
 end
