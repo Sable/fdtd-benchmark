@@ -1,0 +1,26 @@
+{
+    "type": "implementation",
+    "short-name":"js",
+    "description":"JavaScript implementation",
+    "language":"js",
+    "core-source-files": [
+       { "file": "./fdtd.js"}
+    ],
+    "runner-source-file": { "file": "./runner.js" },
+    "runner-arguments": [
+        { "expand": "/experiment/input-size" }
+    ],
+    "libraries": [
+        { "file": "./common/fletcher_sum.js" }
+    ],
+    "dependencies": [
+        {
+            "source": "https://github.com/Sable/ostrich-js-implementation-common.git",
+            "destination": { "file": "./common/" }
+        }
+    ],
+    "compatibilities": [
+        "https://github.com/Sable/ostrich-browserify-compiler.git",
+        "https://github.com/Sable/ostrich-chrome-environment.git"
+    ]
+}
