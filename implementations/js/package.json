@@ -19,8 +19,8 @@
   "dependencies": {
     "ndarray": "^1.0.18",
     "cwise": "^1.0.9",
-    "ndarray-gemm": "^1.0.0",
     "ndarray-ops": "^1.2.2",
-    "zeros": "^1.0.0"
+    "zeros": "^1.0.0",
+    "ndarray-show": "^2.0.0"
   }
 }

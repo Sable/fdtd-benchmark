@@ -1,7 +1,6 @@
 var ndarray = require('ndarray');
 var ops = require('ndarray-ops');
 var cwise = require('cwise');
-var gemm = require('ndarray-gemm');
 var zeros = require('zeros');
 
 var updateH = cwise({
@@ -32,7 +31,7 @@ var updateE = cwise({
         'scalar'
     ],
     body: function (e, h11, h12, h21, h22, Dt_over_eps0, C1, C2) {
-        e += Dt_over_eps0 * ((h11 - h12) * C2 + (h21 - h22) * C1)
+        e += Dt_over_eps0 * ((h11 - h12) * C2 - (h21 - h22) * C1)
     }
 }) 
 
@@ -77,10 +76,11 @@ function fdtd(Lx, Ly, Lz, Nx, Ny, Nz, nrm, Nt) {
             Cz
         );
 
+
         // Hy=Hy+(Dt/mu0)*((Ez(2:Nx+1, :, :)-Ez(1:Nx, :, :))*Cx-(Ex(:, :, 2:Nz+1)-Ex(:, :, 1:Nz))*Cz);
         updateH(
             Hy,
-            Ez.hi(Nz+1,null,null).lo(1,null,null),
+            Ez.hi(Nx+1,null,null).lo(1,null,null),
             Ez.hi(Nx,null,null).lo(0,null,null),
             Ex.hi(null,null,Nz+1).lo(null, null, 1),
             Ex.hi(null,null, Nz).lo(null, null, 0),
@@ -109,6 +109,7 @@ function fdtd(Lx, Ly, Lz, Nx, Ny, Nz, nrm, Nt) {
             Hz.hi(null,Ny-1,Nz).lo(null,0,1),
             Hy.hi(null,Ny,Nz).lo(null,1,1),
             Hy.hi(null,Ny,Nz-1).lo(null,1,0),
+            Dt/eps0,
             Cz,
             Cy
         )
@@ -120,6 +121,7 @@ function fdtd(Lx, Ly, Lz, Nx, Ny, Nz, nrm, Nt) {
             Hx.hi(Nx,null,Nz-1).lo(1,null,0),
             Hz.hi(Nx,null,Nz).lo(1,null,1),
             Hz.hi(Nx-1,null,Nz).lo(0,null,1),
+            Dt/eps0,
             Cx,
             Cz
         ) 
@@ -131,6 +133,7 @@ function fdtd(Lx, Ly, Lz, Nx, Ny, Nz, nrm, Nt) {
             Hy.hi(Nx-1,Ny,null).lo(0,1,null),
             Hx.hi(Nx,Ny,null).lo(1,1,null),
             Hx.hi(Nx,Ny-1,null).lo(1,0,null),
+            Dt/eps0,
             Cy,
             Cx
         )
